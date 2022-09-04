@@ -1,0 +1,1 @@
+Entity(type=Group, name=4851001/00002, newName=null, code=32373, newCode=null, scheduleUrl=https://ruz.spbstu.ru/faculty/122/groups/32373, extra=null)

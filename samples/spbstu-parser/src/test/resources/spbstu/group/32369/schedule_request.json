@@ -1,0 +1,887 @@
+[
+  {
+    "date": "2022-05-16",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Теория вероятностей и математическая статистика",
+            "type": "Практика",
+            "classroom": "219",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=168"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Дискретная математика",
+            "type": "Практика",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=204"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Аппаратные средства вычислительной техники",
+            "type": "Лабораторные",
+            "classroom": "171",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=118"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-17",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "11:40",
+        "lessons": [
+          {
+            "subject": "Теория вероятностей и математическая статистика",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=155"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=203"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Операционные системы",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=177"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-18",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Элективная физическая культура и спорт",
+            "comment": "Поток",
+            "type": "Практика",
+            "classroom": "Секции",
+            "building": {
+              "name": "Спорткомплекс",
+              "address": null,
+              "coordinate": null
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-19",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "11:40",
+        "lessons": [
+          {
+            "subject": "Операционные системы",
+            "type": "Лабораторные",
+            "classroom": "105",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=178"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "type": "Практика",
+            "classroom": "165",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=203"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-20",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Дискретная математика",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=204"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Аппаратные средства вычислительной техники",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=118"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-21",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Элективная физическая культура и спорт",
+            "comment": "Поток",
+            "type": "Практика",
+            "classroom": "Секции",
+            "building": {
+              "name": "Спорткомплекс",
+              "address": null,
+              "coordinate": null
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-22",
+    "week": "Четная"
+  },
+  {
+    "date": "2022-05-23",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Теория вероятностей и математическая статистика",
+            "type": "Практика",
+            "classroom": "219",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=168"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Дискретная математика",
+            "type": "Практика",
+            "classroom": "220",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=204"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Аппаратные средства вычислительной техники",
+            "type": "Лабораторные",
+            "classroom": "171",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=118"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-24",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "11:40",
+        "lessons": [
+          {
+            "subject": "Теория вероятностей и математическая статистика",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=155"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "12:00",
+        "end": "13:40",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru/course/view.php?id=203"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "start": "14:00",
+        "end": "15:40",
+        "lessons": [
+          {
+            "subject": "Операционные системы",
+            "comment": "Поток",
+            "type": "Лекции",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ],
+            "links": [
+              {
+                "title": "СДО",
+                "url": "https://dl-ic.spbstu.ru//course/view.php?id=177"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-25",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "13:20",
+        "lessons": [
+          {
+            "subject": "Основы проектной деятельности",
+            "comment": "Поток",
+            "type": "Зачет",
+            "classroom": "Дистанционно",
+            "building": {
+              "name": "DL",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-26",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "13:20",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "comment": "Поток",
+            "type": "Зачет",
+            "classroom": "235",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-27",
+    "week": "Нечетная"
+  },
+  {
+    "date": "2022-05-28",
+    "week": "Нечетная"
+  },
+  {
+    "date": "2022-05-29",
+    "week": "Нечетная"
+  },
+  {
+    "date": "2022-05-30",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "11:40",
+        "lessons": [
+          {
+            "subject": "Аппаратные средства вычислительной техники",
+            "comment": "Поток",
+            "type": "Консультации",
+            "classroom": "105",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "start": "12:00",
+        "end": "18:00",
+        "lessons": [
+          {
+            "subject": "Аппаратные средства вычислительной техники",
+            "comment": "Поток",
+            "type": "Экзамен",
+            "classroom": "105",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-05-31",
+    "week": "Четная"
+  },
+  {
+    "date": "2022-06-01",
+    "week": "Четная"
+  },
+  {
+    "date": "2022-06-02",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Иностранный язык. Профессионально-ориентированный курс",
+            "type": "Консультации",
+            "classroom": "305",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-03",
+    "week": "Четная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "17:20",
+        "lessons": [
+          {
+            "subject": "Иностранный язык. Профессионально-ориентированный курс",
+            "type": "Экзамен",
+            "classroom": "305",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-04",
+    "week": "Четная"
+  },
+  {
+    "date": "2022-06-05",
+    "week": "Четная"
+  },
+  {
+    "date": "2022-06-06",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "comment": "Поток",
+            "type": "Консультации",
+            "classroom": "165",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-07",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "17:20",
+        "lessons": [
+          {
+            "subject": "Математическая логика и теория алгоритмов",
+            "comment": "Поток",
+            "type": "Экзамен",
+            "classroom": "165",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-08",
+    "week": "Нечетная"
+  },
+  {
+    "date": "2022-06-09",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "10:00",
+        "end": "11:40",
+        "lessons": [
+          {
+            "subject": "Элективная физическая культура и спорт",
+            "type": "Зачет",
+            "classroom": "Секции",
+            "building": {
+              "name": "Спорткомплекс",
+              "address": null,
+              "coordinate": null
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-10",
+    "week": "Нечетная",
+    "intervals": [
+      {
+        "number": 1,
+        "start": "16:00",
+        "end": "17:40",
+        "lessons": [
+          {
+            "subject": "Теория вероятностей и математическая статистика",
+            "comment": "Поток",
+            "type": "Консультации",
+            "classroom": "170 Б",
+            "building": {
+              "name": "Главное здание",
+              "address": null,
+              "coordinate": null
+            },
+            "teachers": [
+              {
+                "name": "Штыркина Анна Александровна",
+                "code": "17189"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2022-06-11",
+    "week": "Нечетная"
+  },
+  {
+    "date": "2022-06-12",
+    "week": "Нечетная"
+  }
+]
