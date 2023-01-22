@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 
+group = "me.campusapp.parsers"
+version = "0.1.0"
+
 dependencies {
     implementation(libs.coroutines)
 
