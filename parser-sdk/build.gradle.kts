@@ -5,7 +5,7 @@
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlinSerialization)
-    publishing
+    `maven-publish`
 }
 
 group = "me.campusapp.parsers"

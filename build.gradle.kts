@@ -18,4 +18,24 @@ subprojects {
         }
         outputs.upToDateWhen { false }
     }
+
+    plugins.withId("org.gradle.maven-publish") {
+        configure<PublishingExtension> {
+            repositories {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/campus-mobile/campus-parser-kotlin-sdk")
+                    credentials {
+                        username = project.findProperty("gpr.user")?.toString() ?: System.getenv("USERNAME")
+                        password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
+                    }
+                }
+            }
+            publications {
+                register<MavenPublication>("gpr") {
+                    from(components.getByName("java"))
+                }
+            }
+        }
+    }
 }
