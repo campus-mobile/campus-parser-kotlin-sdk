@@ -7,6 +7,7 @@ package ru.campus.parser.sdk.api
 import okhttp3.Authenticator
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
@@ -53,4 +54,8 @@ fun OkHttpClient.Builder.disableSslChecks(): OkHttpClient.Builder {
     // Create an ssl socket factory with our all-trusting manager
     return sslSocketFactory(sslContext.socketFactory, allAcceptTrustManager)
         .hostnameVerifier { _, _ -> true }
+}
+
+fun OkHttpClient.Builder.setHttpProtocol(): OkHttpClient.Builder {
+    return protocols(listOf(Protocol.HTTP_1_1))
 }

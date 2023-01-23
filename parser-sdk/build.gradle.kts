@@ -5,22 +5,23 @@
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlinSerialization)
+    publishing
 }
 
 group = "me.campusapp.parsers"
 version = "0.1.0"
 
 dependencies {
-    implementation(libs.coroutines)
+    api(libs.coroutines)
 
-    implementation(libs.kotlinSerialization)
+    api(libs.kotlinSerialization)
 
-    implementation(libs.ktorClient)
+    api(libs.ktorClient)
     implementation(libs.ktorClientOkHttp)
     implementation(libs.ktorClientLogging)
 
-    implementation(libs.kotlinxDateTime)
-    implementation(libs.apachePoi)
+    api(libs.kotlinxDateTime)
+    api(libs.apachePoi)
 
     testImplementation(libs.kotlinTestJUnit)
 }

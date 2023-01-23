@@ -19,8 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
-import java.math.BigInteger
-import java.security.MessageDigest
 import java.util.logging.Level
 import java.util.logging.Logger
 
@@ -31,7 +29,7 @@ suspend fun getFileFromUrl(
     fileExtension: String,
     logger: Logger,
 ): File {
-    val fileName: String = md5(urlString)
+    val fileName: String = urlString.md5()
     val cacheDir = File("cache/$cacheDirectoryName")
     cacheDir.mkdirs()
     val file = File(cacheDir, "$fileName.$fileExtension")
@@ -85,7 +83,38 @@ suspend fun getFileFromUrl(
     }
 }
 
-internal fun md5(input: String): String {
-    val md = MessageDigest.getInstance("MD5")
-    return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
+suspend fun simpleFileFromUrl(
+    httpClient: HttpClient,
+    urlString: String,
+    cacheDirectoryName: String,
+    fileExtension: String,
+    logger: Logger,
+): File {
+    val fileName: String = urlString.md5()
+    val cacheDir = File("cache/$cacheDirectoryName")
+    cacheDir.mkdirs()
+    val file = File(cacheDir, "$fileName.$fileExtension")
+    return httpClient.get<HttpStatement>(urlString).execute { httpResponse ->
+        if (httpResponse.status == HttpStatusCode.NotFound) {
+            throw FileNotFoundException("file at $urlString not found")
+        }
+        val channel: ByteReadChannel = httpResponse.receive()
+
+        if (!channel.isClosedForRead) {
+            withContext(Dispatchers.IO) {
+                file.delete()
+                file.createNewFile()
+            }
+
+            while (!channel.isClosedForRead) {
+                val packet: ByteReadPacket = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong(), 32)
+                while (!packet.isEmpty) {
+                    val bytes: ByteArray = packet.readBytes()
+                    withContext(Dispatchers.IO) { file.appendBytes(bytes) }
+                }
+            }
+            logger.log(Level.INFO, "A file saved to ${file.path}")
+        }
+        file
+    }
 }

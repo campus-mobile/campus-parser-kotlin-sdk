@@ -17,6 +17,9 @@ import java.util.logging.Logger
 fun createDefaultHttpClient(
     logger: Logger,
     withProxy: Boolean = false,
+    useHttp1: Boolean = false,
+    socketTimeoutMillis: Long = 10000,
+    requestTimeoutMillis: Long = 30000,
     configure: HttpClientConfig<OkHttpConfig>.() -> Unit = {},
 ): HttpClient {
     return HttpClient(OkHttp) {
@@ -24,14 +27,15 @@ fun createDefaultHttpClient(
             threadsCount = 8
             config {
                 cookieJar(InMemoryCookieJar())
+                if (useHttp1) setHttpProtocol()
                 if (withProxy) setupProxy()
                 if (withProxy) setupAuthenticator()
                 disableSslChecks()
             }
         }
         install(HttpTimeout) {
-            socketTimeoutMillis = 10000
-            requestTimeoutMillis = 30000
+            this.socketTimeoutMillis = socketTimeoutMillis
+            this.requestTimeoutMillis = requestTimeoutMillis
         }
         install(Logging) {
             this.level = LogLevel.INFO
