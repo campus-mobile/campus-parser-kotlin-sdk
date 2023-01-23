@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      USERNAME: ${{ secrets.GITHUB_ACTOR }}
       TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
