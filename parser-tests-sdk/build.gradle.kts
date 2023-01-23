@@ -16,4 +16,7 @@ dependencies {
     api(libs.kotlinTestJUnit)
     api(libs.okhttpClient)
     api(libs.okhttpMockServer)
+
+    api(libs.coroutinesTest)
+    api(libs.ktorClientMock)
 }
