@@ -8,6 +8,8 @@ import io.ktor.client.HttpClient
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.LocalDate
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import ru.campus.parser.sdk.DateProvider
 import ru.campus.parser.sdk.api.ParserApi
 import ru.campus.parser.sdk.api.createDefaultHttpClient
@@ -21,14 +23,12 @@ import ru.campus.parser.sdk.model.ProcessedEntity
 import ru.campus.parser.sdk.model.SavedEntity
 import ru.campus.parser.sdk.model.SavedSchedule
 import ru.campus.parser.sdk.model.Schedule
-import ru.campus.parser.sdk.utils.createCombinedLogger
 import ru.campus.parser.sdk.utils.createDefaultDateProvider
 import ru.campus.parser.sdk.utils.getParserApiUrl
 import ru.campus.parser.sdk.utils.weekName
 import ru.campus.parser.sdk.utils.weekNumber
 import ru.campus.parsers.spbstu.group.SPBSTUGroupEntitiesCollector
 import ru.campus.parsers.spbstu.group.SPBSTUGroupScheduleCollector
-import java.util.logging.Logger
 
 /**
  * Парсер Санкт-Петербургского политехнического университета.
@@ -38,7 +38,7 @@ import java.util.logging.Logger
 class SPBSTUParser @JvmOverloads constructor(
     credentials: Credentials,
     parserApiBaseUrl: String = getParserApiUrl(),
-    override val logger: Logger = createCombinedLogger("spbstu-parser"),
+    override val logger: Logger = LogManager.getLogger("spbstu-parser"),
     httpClient: HttpClient = createDefaultHttpClient(logger),
     parserApi: ParserApi = ParserApi(
         httpClient = httpClient,

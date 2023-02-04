@@ -8,10 +8,10 @@ plugins {
 }
 
 group = "me.campusapp.parsers"
-version = "0.1.0"
+version = "0.2.0"
 
 dependencies {
-    api(libs.kotlinSerialization)
+    api(projects.parserSdk)
 
     api(libs.kotlinTestJUnit)
     api(libs.okhttpClient)
