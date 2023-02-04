@@ -38,7 +38,7 @@ import ru.campus.parsers.spbstu.group.SPBSTUGroupScheduleCollector
 class SPBSTUParser @JvmOverloads constructor(
     credentials: Credentials,
     parserApiBaseUrl: String = getParserApiUrl(),
-    override val logger: Logger = LogManager.getLogger("spbstu-parser"),
+    override val logger: Logger = LogManager.getLogger(SPBSTUParser::class.java),
     httpClient: HttpClient = createDefaultHttpClient(logger),
     parserApi: ParserApi = ParserApi(
         httpClient = httpClient,
