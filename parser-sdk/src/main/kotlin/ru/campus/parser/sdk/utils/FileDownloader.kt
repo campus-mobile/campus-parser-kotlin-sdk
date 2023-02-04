@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.logging.Level
-import java.util.logging.Logger
+import org.apache.logging.log4j.Logger
 
 suspend fun getFileFromUrl(
     httpClient: HttpClient,
@@ -76,7 +76,7 @@ suspend fun getFileFromUrl(
                 }
             }
 
-            logger.log(Level.INFO, "A file saved to ${file.path}")
+            logger.info("A file saved to {}", file.path)
         }
 
         file
@@ -113,7 +113,7 @@ suspend fun simpleFileFromUrl(
                     withContext(Dispatchers.IO) { file.appendBytes(bytes) }
                 }
             }
-            logger.log(Level.INFO, "A file saved to ${file.path}")
+            logger.info("A file saved to {}", file.path)
         }
         file
     }

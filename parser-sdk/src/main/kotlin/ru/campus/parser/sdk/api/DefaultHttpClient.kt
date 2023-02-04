@@ -11,8 +11,7 @@ import io.ktor.client.engine.okhttp.OkHttpConfig
 import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logging
-import java.util.logging.Level
-import java.util.logging.Logger
+import org.apache.logging.log4j.Logger
 
 fun createDefaultHttpClient(
     logger: Logger,
@@ -41,7 +40,7 @@ fun createDefaultHttpClient(
             this.level = LogLevel.INFO
             this.logger = object : io.ktor.client.features.logging.Logger {
                 override fun log(message: String) {
-                    logger.log(Level.INFO, message)
+                    logger.info(message)
                 }
             }
         }

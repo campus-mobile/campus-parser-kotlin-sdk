@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "me.campusapp.parsers"
-version = "0.1.0"
+version = "0.2.0"
 
 dependencies {
     api(libs.coroutines)
@@ -22,6 +22,7 @@ dependencies {
 
     api(libs.kotlinxDateTime)
     api(libs.apachePoi)
+    api(libs.log4jApi)
 
     testImplementation(libs.kotlinTestJUnit)
 }

@@ -77,11 +77,11 @@ abstract class BaseParser(
                         try {
                             process(item)
                         } catch (exc: Exception) {
-                            logger.log(Level.WARNING, "$item processing failed", exc)
+                            logger.warn("$item processing failed", exc)
                             null
                         } finally {
                             val processedCount = processedCounter.incrementAndGet()
-                            logger.log(Level.INFO, "$description processed $processedCount / $itemsCount")
+                            logger.info("{} processed {} / {}", description, processedCount, itemsCount)
                         }
                     }
                 }

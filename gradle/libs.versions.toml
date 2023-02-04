@@ -37,6 +37,9 @@ jsoup = { module = "org.jsoup:jsoup", version = "1.14.3" }
 # Apache POI
 apachePoi = { module = "org.apache.poi:poi", version = "5.2.0" }
 
+# logs
+log4jApi = { module = "org.apache.logging.log4j:log4j-api", version = "2.19.0" }
+
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }

@@ -5,8 +5,8 @@
 package ru.campus.parser.sdk
 
 import kotlinx.coroutines.runBlocking
+import org.apache.logging.log4j.Logger
 import ru.campus.parser.sdk.model.ParserResult
-import java.util.logging.Logger
 
 interface IParser {
     /**
