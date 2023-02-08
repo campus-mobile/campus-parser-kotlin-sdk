@@ -7,9 +7,6 @@ plugins {
     `maven-publish`
 }
 
-group = "me.campusapp.parsers"
-version = "0.2.0"
-
 dependencies {
     api(projects.parserSdk)
 

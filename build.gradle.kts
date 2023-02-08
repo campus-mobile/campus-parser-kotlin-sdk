@@ -20,14 +20,30 @@ subprojects {
     }
 
     plugins.withId("org.gradle.maven-publish") {
+        group = "me.campusapp.parsers"
+        version = "0.3.0"
+
+        configure<JavaPluginExtension> {
+            withJavadocJar()
+            withSourcesJar()
+        }
+
         configure<PublishingExtension> {
             repositories {
                 maven {
                     name = "GitHubPackages"
                     url = uri("https://maven.pkg.github.com/campus-mobile/campus-parser-kotlin-sdk")
                     credentials {
-                        username = project.findProperty("gpr.user")?.toString() ?: System.getenv("USERNAME")
-                        password = project.findProperty("gpr.key")?.toString() ?: System.getenv("TOKEN")
+                        username = project.findProperty("gpr.user")?.toString() ?: System.getenv("GPR_USERNAME")
+                        password = project.findProperty("gpr.key")?.toString() ?: System.getenv("GPR_TOKEN")
+                    }
+                }
+                maven {
+                    name = "SpacePackages"
+                    url = uri("https://maven.pkg.jetbrains.space/campus/p/campus/maven")
+                    credentials {
+                        username = System.getenv("SPACE_USERNAME")
+                        password = System.getenv("SPACE_PASSWORD")
                     }
                 }
             }
