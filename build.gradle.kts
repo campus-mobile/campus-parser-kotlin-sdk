@@ -21,7 +21,7 @@ subprojects {
 
     plugins.withId("org.gradle.maven-publish") {
         group = "me.campusapp.parsers"
-        version = "0.3.0"
+        version = "0.3.1"
 
         configure<JavaPluginExtension> {
             withJavadocJar()
@@ -40,7 +40,7 @@ subprojects {
                 }
                 maven {
                     name = "SpacePackages"
-                    url = uri("https://maven.pkg.jetbrains.space/campus/p/campus/maven")
+                    url = uri("https://maven.pkg.jetbrains.space/campus/p/public/maven")
                     credentials {
                         username = System.getenv("SPACE_USERNAME")
                         password = System.getenv("SPACE_PASSWORD")
