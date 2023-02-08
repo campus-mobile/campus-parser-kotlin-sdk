@@ -5,6 +5,7 @@
 package ru.campus.parser.sdk.model
 
 import kotlinx.serialization.Serializable
+import ru.campus.parser.sdk.utils.assertTimeValid
 
 @Serializable
 data class Schedule(
@@ -18,7 +19,12 @@ data class Schedule(
         val start: String,
         val end: String,
         val lessons: List<Lesson>,
-    )
+    ) {
+        init {
+            assertTimeValid(start)
+            assertTimeValid(end)
+        }
+    }
 
     @Serializable
     data class Lesson(
@@ -31,7 +37,11 @@ data class Schedule(
         val groups: List<Entity> = emptyList(),
         val subgroups: List<String> = emptyList(),
         val links: List<Link> = emptyList(),
-    )
+    ) {
+        init {
+            assert(subject.length >= 2) { "subject should NOT be shorter than 2 characters" }
+        }
+    }
 
     @Serializable
     data class Entity(

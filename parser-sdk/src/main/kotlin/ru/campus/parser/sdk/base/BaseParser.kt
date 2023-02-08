@@ -21,13 +21,12 @@ import kotlinx.datetime.plus
 import ru.campus.parser.sdk.IParser
 import ru.campus.parser.sdk.api.ParserApi
 import ru.campus.parser.sdk.model.Entity
-import ru.campus.parser.sdk.model.Schedule
-import ru.campus.parser.sdk.model.WeekScheduleItem
 import ru.campus.parser.sdk.model.ParserResult
 import ru.campus.parser.sdk.model.SavedEntity
 import ru.campus.parser.sdk.model.SavedSchedule
+import ru.campus.parser.sdk.model.Schedule
+import ru.campus.parser.sdk.model.WeekScheduleItem
 import java.util.concurrent.atomic.AtomicInteger
-import java.util.logging.Level
 
 abstract class BaseParser(
     private val parserApi: ParserApi,
