@@ -66,7 +66,7 @@ class ExplicitDatePredicate(
 
 class MinimalDatePredicate(
     private val minDate: LocalDate
-): DatePredicate() {
+) : DatePredicate() {
     override fun invoke(date: LocalDate): Boolean {
         return minDate <= date
     }
@@ -77,7 +77,7 @@ class MinimalDatePredicate(
 
 class MaximumDatePredicate(
     private val maxDate: LocalDate
-): DatePredicate() {
+) : DatePredicate() {
     override fun invoke(date: LocalDate): Boolean {
         return maxDate >= date
     }
@@ -88,7 +88,7 @@ class MaximumDatePredicate(
 
 class CombinedDatePredicate(
     private val predicates: List<DatePredicate>
-): DatePredicate() {
+) : DatePredicate() {
     override fun invoke(date: LocalDate): Boolean {
         return predicates.all { it.invoke(date) }
     }

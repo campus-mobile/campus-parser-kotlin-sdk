@@ -17,10 +17,9 @@ import io.ktor.utils.io.core.isEmpty
 import io.ktor.utils.io.core.readBytes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.apache.logging.log4j.Logger
 import java.io.File
 import java.io.FileNotFoundException
-import java.util.logging.Level
-import org.apache.logging.log4j.Logger
 
 suspend fun getFileFromUrl(
     httpClient: HttpClient,
