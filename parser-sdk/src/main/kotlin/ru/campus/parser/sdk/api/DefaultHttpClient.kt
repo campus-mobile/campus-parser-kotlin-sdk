@@ -17,6 +17,7 @@ fun createDefaultHttpClient(
     logger: Logger,
     withProxy: Boolean = false,
     useHttp1: Boolean = false,
+    withCookie: Boolean = true,
     socketTimeoutMillis: Long = 10000,
     requestTimeoutMillis: Long = 30000,
     configure: HttpClientConfig<OkHttpConfig>.() -> Unit = {},
@@ -25,7 +26,7 @@ fun createDefaultHttpClient(
         engine {
             threadsCount = 8
             config {
-                cookieJar(InMemoryCookieJar())
+                if (withCookie) cookieJar(InMemoryCookieJar())
                 if (useHttp1) setHttpProtocol()
                 if (withProxy) setupProxy()
                 if (withProxy) setupAuthenticator()
