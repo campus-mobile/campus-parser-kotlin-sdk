@@ -26,6 +26,6 @@ class InMemoryCookieJar : CookieJar {
             val newList: List<Cookie> = currentList.filter { cookie ->
                 cookie.matches(url) && cookie.name !in validCookies.map { it.name }
             } + validCookies
-        } while (container.compareAndSet(currentList, newList))
+        } while (container.compareAndSet(currentList, newList).not())
     }
 }
