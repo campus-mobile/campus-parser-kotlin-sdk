@@ -14,15 +14,15 @@ import java.io.File
 
 private const val DUMP_DIR_NAME = "dump"
 
-fun createDumpRequestsHttpClient(): HttpClient {
+fun createDumpRequestsHttpClient(dumpDirName: String = DUMP_DIR_NAME): HttpClient {
     return HttpClient {
         install(DumpRequests) {
-            dirName = DUMP_DIR_NAME
+            dirName = dumpDirName
         }
     }
 }
 
-fun createDumpMockHttpClient(): HttpClient {
+fun createDumpMockHttpClient(dumpDirName: String = DUMP_DIR_NAME): HttpClient {
     return HttpClient(MockEngine) {
         engine {
             addHandler { request ->
@@ -32,7 +32,7 @@ fun createDumpMockHttpClient(): HttpClient {
 
                 val fileName = "$method-$url-$bodyHash.resp"
 
-                val dir = File(DUMP_DIR_NAME)
+                val dir = File(dumpDirName)
                 val file = File(dir, fileName)
 
                 if (file.exists()) {

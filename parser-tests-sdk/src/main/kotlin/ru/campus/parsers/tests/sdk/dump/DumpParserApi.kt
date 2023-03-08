@@ -24,16 +24,18 @@ import ru.campus.parser.sdk.utils.md5
 import java.io.File
 import kotlin.test.assertEquals
 
-fun createDumpRequestsParserApi() = ParserApi(
+private const val DUMP_DIR_NAME = "dump-api"
+
+fun createDumpRequestsParserApi(dumpDirName: String = DUMP_DIR_NAME) = ParserApi(
     httpClient = HttpClient(MockEngine) {
         engine {
             addHandler { request ->
                 val url: String = request.url.toString()
                 if (url.endsWith("entities")) {
-                    saveRequestToDump(request, hashInName = true)
+                    saveRequestToDump(request, dumpDirName, hashInName = true)
                     responseEntitiesOk(request)
                 } else if (url.endsWith("schedule")) {
-                    saveRequestToDump(request, hashInName = false)
+                    saveRequestToDump(request, dumpDirName, hashInName = false)
                     responseScheduleOk()
                 } else {
                     respondError(HttpStatusCode.BadRequest, "invalid url $url")
@@ -46,19 +48,19 @@ fun createDumpRequestsParserApi() = ParserApi(
     userName = ""
 )
 
-fun createDumpMockParserApi() = ParserApi(
+fun createDumpMockParserApi(dumpDirName: String = DUMP_DIR_NAME) = ParserApi(
     httpClient = HttpClient(MockEngine) {
         engine {
             addHandler { request ->
                 val url: String = request.url.toString()
                 if (url.endsWith("entities")) {
-                    if (isRequestDumpExist(request)) {
+                    if (isRequestDumpExist(request, dumpDirName)) {
                         responseEntitiesOk(request)
                     } else {
                         respondError(HttpStatusCode.BadRequest, "$request not found in dump")
                     }
                 } else if (url.endsWith("schedule")) {
-                    val dump = getRequestDump(request)
+                    val dump = getRequestDump(request, dumpDirName)
                     val body = request.bodyText().prettyJson()
 
                     assertEquals(expected = dump, actual = body)
@@ -95,9 +97,7 @@ private fun String.prettyJson(): String {
     return prettyJson.encodeToString(jsonElement)
 }
 
-private const val DUMP_DIR_NAME = "dump-api"
-
-private suspend fun saveRequestToDump(request: HttpRequestData, hashInName: Boolean) {
+private suspend fun saveRequestToDump(request: HttpRequestData, dumpDirName: String, hashInName: Boolean) {
     val method: String = request.method.value
     val url: String = request.url.toString().encodeURLParameter()
     val body: String = request.bodyText()
@@ -109,13 +109,13 @@ private suspend fun saveRequestToDump(request: HttpRequestData, hashInName: Bool
         "$method-$url.json"
     }
 
-    val dir = File(DUMP_DIR_NAME)
+    val dir = File(dumpDirName)
     dir.mkdirs()
     val file = File(dir, fileName)
     file.writeText(body.prettyJson())
 }
 
-private suspend fun isRequestDumpExist(request: HttpRequestData): Boolean {
+private suspend fun isRequestDumpExist(request: HttpRequestData, dumpDirName: String): Boolean {
     val method: String = request.method.value
     val url: String = request.url.toString().encodeURLParameter()
     val body: String = request.bodyText()
@@ -123,19 +123,19 @@ private suspend fun isRequestDumpExist(request: HttpRequestData): Boolean {
 
     val fileName = "$method-$url-$bodyHash.json"
 
-    val dir = File(DUMP_DIR_NAME)
+    val dir = File(dumpDirName)
     dir.mkdirs()
     val file = File(dir, fileName)
     return file.exists()
 }
 
-private fun getRequestDump(request: HttpRequestData): String {
+private fun getRequestDump(request: HttpRequestData, dumpDirName: String): String {
     val method: String = request.method.value
     val url: String = request.url.toString().encodeURLParameter()
 
     val fileName = "$method-$url.json"
 
-    val dir = File(DUMP_DIR_NAME)
+    val dir = File(dumpDirName)
     dir.mkdirs()
     val file = File(dir, fileName)
     return file.readText()
