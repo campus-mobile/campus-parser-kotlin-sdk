@@ -86,6 +86,7 @@ class MaximumDatePredicate(
         get() = "max-date-$maxDate"
 }
 
+@Deprecated(message = "use AllOfDatePredicate", replaceWith = ReplaceWith("AllOfDatePredicate"))
 class CombinedDatePredicate(
     private val predicates: List<DatePredicate>
 ) : DatePredicate() {
@@ -94,4 +95,24 @@ class CombinedDatePredicate(
     }
 
     override val stringDescription: String get() = predicates.toString()
+}
+
+class AllOfDatePredicate(
+    private val predicates: List<DatePredicate>
+) : DatePredicate() {
+    override fun invoke(date: LocalDate): Boolean {
+        return predicates.all { it.invoke(date) }
+    }
+
+    override val stringDescription: String get() = "all:$predicates"
+}
+
+class AnyOfDatePredicate(
+    private val predicates: List<DatePredicate>
+) : DatePredicate() {
+    override fun invoke(date: LocalDate): Boolean {
+        return predicates.any { it.invoke(date) }
+    }
+
+    override val stringDescription: String get() = "any:$predicates"
 }
