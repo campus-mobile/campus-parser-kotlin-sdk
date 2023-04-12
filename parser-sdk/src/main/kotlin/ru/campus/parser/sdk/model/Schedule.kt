@@ -5,7 +5,10 @@
 package ru.campus.parser.sdk.model
 
 import kotlinx.serialization.Serializable
+import org.apache.commons.validator.routines.UrlValidator
 import ru.campus.parser.sdk.utils.assertTimeValid
+import ru.campus.parser.sdk.utils.assertValidUrl
+import java.net.URI
 
 @Serializable
 data class Schedule(
@@ -53,7 +56,11 @@ data class Schedule(
     data class Link(
         val title: String,
         val url: String,
-    )
+    ) {
+        init {
+            assert(UrlValidator().isValid(url)) { "not valid url" }
+        }
+    }
 
     @Serializable
     data class Building(

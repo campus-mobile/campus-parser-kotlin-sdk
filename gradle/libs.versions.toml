@@ -37,6 +37,9 @@ jsoup = { module = "org.jsoup:jsoup", version = "1.14.3" }
 # Apache POI
 apachePoi = { module = "org.apache.poi:poi", version = "5.2.0" }
 
+# url validation
+urlValidator = { module = "commons-validator:commons-validator", version = "1.7" }
+
 # logs
 log4jApi = { module = "org.apache.logging.log4j:log4j-api", version = "2.19.0" }
 

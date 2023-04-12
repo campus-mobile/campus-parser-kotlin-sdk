@@ -16,6 +16,7 @@ dependencies {
     api(libs.ktorClient)
     implementation(libs.ktorClientOkHttp)
     implementation(libs.ktorClientLogging)
+    implementation(libs.urlValidator)
 
     api(libs.kotlinxDateTime)
     api(libs.apachePoi)
