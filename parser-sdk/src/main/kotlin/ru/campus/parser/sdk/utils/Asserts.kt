@@ -4,22 +4,38 @@
 
 package ru.campus.parser.sdk.utils
 
-import java.net.URI
+import org.apache.commons.validator.routines.UrlValidator
+import org.apache.commons.validator.routines.UrlValidator.ALLOW_2_SLASHES
+import kotlin.reflect.KProperty
 
 private val timeRegex = Regex("""\d\d:\d\d""")
+private val urlValidator = UrlValidator(ALLOW_2_SLASHES)
 
-fun assertTimeValid(time: String) {
-    assert(timeRegex.matches(time)) { "invalid format of time in $time" }
+fun <T : String?> assertTimeValid(property: KProperty<T>) {
+    val value: String = property.call() ?: return
+
+    assert(timeRegex.matches(value)) { "${property.name} [$value] have invalid format" }
+    val (hours: Int, minutes: Int) = value.split(":").map { it.toInt() }
+    assert(hours in 0..23) { "hours should be in 0..23" }
+    assert(minutes in 0..59) { "minutes should be in 0..59" }
 }
 
-fun assertEntityName(name: String) {
-    assert(name.length in 2..119) { "name should be more 1 and less 120 characters" }
+fun <T : String?> assertLength(property: KProperty<T>, minLength: Int, maxLength: Int) {
+    val value: String = property.call() ?: return
+    assert(value.length in minLength until maxLength) { "${property.name} [$value] should be more than $minLength and less $maxLength characters" }
 }
 
-fun assertEntityCode(code: String) {
-    assert(code.length > 1) { "code should be more than 1 character" }
+fun <T : String?> assertUrl(property: KProperty<T>) {
+    val value: String = property.call() ?: return
+    assert(urlValidator.isValid(value)) { "${property.name} [$value] invalid url" }
 }
 
-fun assertValidUrl(url: String) {
-    assert(URI.create(url) != null) { "url should be valid" }
+fun <T : String?> assertLength(property: KProperty<T>, length: Int) {
+    val value: String = property.call() ?: return
+    assert(value.length > length) { "${property.name} [$value] should be more than $length character" }
+}
+
+fun <T : Int?> assertMin(property: KProperty<T>, minValue: Int) {
+    val value: Int = property.call() ?: return
+    assert(value > minValue) { "${property.name} [$value] should be more than $minValue" }
 }
