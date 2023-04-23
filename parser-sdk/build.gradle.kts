@@ -9,6 +9,8 @@ plugins {
 }
 
 dependencies {
+    implementation(kotlin("reflect"))
+
     api(libs.coroutines)
 
     api(libs.kotlinSerialization)

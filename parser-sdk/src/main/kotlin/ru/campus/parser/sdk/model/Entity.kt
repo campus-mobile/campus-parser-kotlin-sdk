@@ -5,9 +5,9 @@
 package ru.campus.parser.sdk.model
 
 import kotlinx.serialization.Serializable
-import ru.campus.parser.sdk.utils.assertEntityCode
-import ru.campus.parser.sdk.utils.assertEntityName
-import ru.campus.parser.sdk.utils.assertValidUrl
+import ru.campus.parser.sdk.utils.assertLength
+import ru.campus.parser.sdk.utils.assertMin
+import ru.campus.parser.sdk.utils.assertUrl
 
 @Serializable
 data class Entity(
@@ -20,11 +20,11 @@ data class Entity(
     val extra: Extra? = null,
 ) {
     init {
-        assertEntityName(name)
-        newName?.also { assertEntityName(it) }
-        code?.also { assertEntityCode(it) }
-        newCode?.also { assertEntityCode(it) }
-        scheduleUrl?.also { assertValidUrl(it) }
+        assertLength(::name, minLength = 2, maxLength = 120)
+        assertLength(::newName, minLength = 2, maxLength = 120)
+        assertLength(::code, length = 1)
+        assertLength(::newCode, length = 1)
+        assertUrl(::scheduleUrl)
     }
 
     enum class Type {
@@ -42,12 +42,12 @@ data class Entity(
         val department: String? = null,
     ) {
         init {
-            faculty?.also { assert(it.length >= 2) { "faculty length should be >= 2" } }
-            specialty?.also { assert(it.length >= 2) { "specialty length should be >= 2" } }
-            course?.also { assert(it >= 1) { "course should be >= 1" } }
-            degree?.also { assert(it.length >= 2) { "degree length should be >= 2" } }
-            educationForm?.also { assert(it.length >= 2) { "educationForm length should be >= 2" } }
-            department?.also { assert(it.length >= 2) { "department length should be >= 2" } }
+            assertLength(::faculty, length = 1)
+            assertLength(::specialty, length = 1)
+            assertMin(::course, minValue = 0)
+            assertLength(::degree, length = 1)
+            assertLength(::educationForm, length = 1)
+            assertLength(::department, length = 1)
         }
     }
 }
