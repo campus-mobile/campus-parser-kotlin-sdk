@@ -9,6 +9,8 @@ plugins {
 }
 
 dependencies {
+    implementation(kotlin("reflect"))
+
     api(libs.coroutines)
 
     api(libs.kotlinSerialization)
@@ -16,6 +18,7 @@ dependencies {
     api(libs.ktorClient)
     implementation(libs.ktorClientOkHttp)
     implementation(libs.ktorClientLogging)
+    implementation(libs.urlValidator)
 
     api(libs.kotlinxDateTime)
     api(libs.apachePoi)

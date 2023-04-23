@@ -116,3 +116,15 @@ class AnyOfDatePredicate(
 
     override val stringDescription: String get() = "any:$predicates"
 }
+
+class NotDatePredicate(
+    private val wrapped: DatePredicate
+) : DatePredicate() {
+    override val stringDescription: String get() = "not:$wrapped"
+
+    override fun invoke(date: LocalDate): Boolean {
+        return wrapped.invoke(date).not()
+    }
+}
+
+fun DatePredicate.not(): NotDatePredicate = NotDatePredicate(this)

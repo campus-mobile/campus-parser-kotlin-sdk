@@ -5,7 +5,10 @@
 package ru.campus.parser.sdk.model
 
 import kotlinx.serialization.Serializable
+import ru.campus.parser.sdk.utils.assertLength
+import ru.campus.parser.sdk.utils.assertMin
 import ru.campus.parser.sdk.utils.assertTimeValid
+import ru.campus.parser.sdk.utils.assertUrl
 
 @Serializable
 data class Schedule(
@@ -21,8 +24,9 @@ data class Schedule(
         val lessons: List<Lesson>,
     ) {
         init {
-            assertTimeValid(start)
-            assertTimeValid(end)
+            assertMin(::number, minValue = 0)
+            assertTimeValid(::start)
+            assertTimeValid(::end)
         }
     }
 
@@ -39,7 +43,10 @@ data class Schedule(
         val links: List<Link> = emptyList(),
     ) {
         init {
-            assert(subject.length >= 2) { "subject should NOT be shorter than 2 characters" }
+            assertLength(::subject, length = 2)
+            assertLength(::comment, length = 1)
+            assertLength(::type, length = 2)
+            assertLength(::classroom, length = 1)
         }
     }
 
@@ -47,20 +54,35 @@ data class Schedule(
     data class Entity(
         val name: String,
         val code: String? = null,
-    )
+    ) {
+        init {
+            assertLength(::name, length = 1)
+            assertLength(::code, length = 1)
+        }
+    }
 
     @Serializable
     data class Link(
         val title: String,
         val url: String,
-    )
+    ) {
+        init {
+            assertLength(::title, length = 1)
+            assertUrl(::url)
+        }
+    }
 
     @Serializable
     data class Building(
         val name: String?,
         val address: String?,
         val coordinate: Coordinate?,
-    )
+    ) {
+        init {
+            assertLength(::name, length = 1)
+            assertLength(::address, length = 1)
+        }
+    }
 }
 
 fun List<Schedule.Entity>.enrichEntities(
