@@ -14,7 +14,8 @@ class AssertsTest {
         listOf(
             "https://schedule.npi-tu.ru/api/v1/faculties",
             "https://schedule.npi-tu.ru/api/v1/faculties/2/years/1/groups/%D0%98%D0%A2%D0%B0/schedule",
-            "https://docs.google.com/uc?export=download&id=1fGCHJRPFPFYdeKkp0frT14crxXHC_mTW"
+            "https://docs.google.com/uc?export=download&id=1fGCHJRPFPFYdeKkp0frT14crxXHC_mTW",
+            "https://dl-ic.spbstu.ru//course/view.php?id=168"
         ).map { TestObject(url = it) }
             .forEach { assertUrl(it::url) }
     }

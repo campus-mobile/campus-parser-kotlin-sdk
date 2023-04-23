@@ -5,10 +5,11 @@
 package ru.campus.parser.sdk.utils
 
 import org.apache.commons.validator.routines.UrlValidator
+import org.apache.commons.validator.routines.UrlValidator.ALLOW_2_SLASHES
 import kotlin.reflect.KProperty
 
 private val timeRegex = Regex("""\d\d:\d\d""")
-private val urlValidator = UrlValidator()
+private val urlValidator = UrlValidator(ALLOW_2_SLASHES)
 
 fun <T : String?> assertTimeValid(property: KProperty<T>) {
     val value: String = property.call() ?: return
