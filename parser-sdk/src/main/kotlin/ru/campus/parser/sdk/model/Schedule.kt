@@ -24,7 +24,7 @@ data class Schedule(
         val lessons: List<Lesson>,
     ) {
         init {
-            assertMin(::number, minValue = 1)
+            assertMin(::number, minValue = 0)
             assertTimeValid(::start)
             assertTimeValid(::end)
         }
