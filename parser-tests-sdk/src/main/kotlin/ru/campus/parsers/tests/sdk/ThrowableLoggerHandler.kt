@@ -11,7 +11,7 @@ import org.apache.logging.log4j.message.Message
 import ru.campus.parser.sdk.utils.asCampusLogger
 
 object ThrowableLogger {
-    operator fun invoke(): ru.campus.parser.sdk.Logger {
+    operator fun invoke(): ru.campus.parser.sdk.logging.Logger {
         val logger: Logger = LogManager.getLogger(ThrowableLogger::class.java)
         return object : Logger by logger {
             override fun logMessage(

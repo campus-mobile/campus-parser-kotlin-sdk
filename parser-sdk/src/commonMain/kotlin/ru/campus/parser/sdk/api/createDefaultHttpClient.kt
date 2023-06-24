@@ -11,7 +11,7 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.cookies.HttpCookies
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import ru.campus.parser.sdk.Logger
+import ru.campus.parser.sdk.logging.Logger
 
 fun createDefaultHttpClient(
     logger: Logger,

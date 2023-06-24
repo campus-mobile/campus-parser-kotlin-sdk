@@ -29,11 +29,6 @@ subprojects {
         group = "me.campusapp.parsers"
         version = "0.7.0"
 
-//        configure<JavaPluginExtension> {
-//            withJavadocJar()
-//            withSourcesJar()
-//        }
-
         configure<PublishingExtension> {
             repositories {
                 maven {
@@ -53,11 +48,6 @@ subprojects {
                     }
                 }
             }
-//            publications {
-//                register<MavenPublication>("gpr") {
-//                    from(components.getByName("java"))
-//                }
-//            }
         }
     }
 }

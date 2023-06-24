@@ -9,7 +9,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.delay
-import ru.campus.parser.sdk.Logger
+import ru.campus.parser.sdk.logging.Logger
 import ru.campus.parser.sdk.utils.isRetryAllowed
 import kotlin.time.Duration.Companion.seconds
 

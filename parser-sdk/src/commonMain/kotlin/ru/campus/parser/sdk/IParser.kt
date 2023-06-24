@@ -4,6 +4,7 @@
 
 package ru.campus.parser.sdk
 
+import ru.campus.parser.sdk.logging.Logger
 import ru.campus.parser.sdk.model.ParserResult
 
 interface IParser {

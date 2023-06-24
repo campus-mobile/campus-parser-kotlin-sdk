@@ -10,7 +10,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.LocalDate
 import org.apache.logging.log4j.LogManager
 import ru.campus.parser.sdk.DateProvider
-import ru.campus.parser.sdk.Logger
+import ru.campus.parser.sdk.logging.Logger
 import ru.campus.parser.sdk.api.ParserApi
 import ru.campus.parser.sdk.api.createDefaultHttpClient
 import ru.campus.parser.sdk.base.BaseParser

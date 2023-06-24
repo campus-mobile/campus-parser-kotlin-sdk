@@ -7,6 +7,10 @@ plugins {
     `maven-publish`
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 dependencies {
     api(projects.parserSdk)
@@ -17,4 +21,10 @@ dependencies {
 
     api(libs.coroutinesTest)
     api(libs.ktorClientMock)
+}
+
+publishing.publications {
+    register<MavenPublication>("gpr") {
+        from(components.getByName("java"))
+    }
 }

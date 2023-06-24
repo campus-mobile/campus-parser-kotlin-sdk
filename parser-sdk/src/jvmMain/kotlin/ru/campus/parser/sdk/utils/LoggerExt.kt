@@ -6,7 +6,7 @@ package ru.campus.parser.sdk.utils
 
 import org.apache.logging.log4j.Logger
 import org.apache.logging.log4j.message.MessageFormatMessage
-import ru.campus.parser.sdk.Logger as CampusLogger
+import ru.campus.parser.sdk.logging.Logger as CampusLogger
 
 fun Logger.asCampusLogger(): CampusLogger {
     val l4jLogger: Logger = this
