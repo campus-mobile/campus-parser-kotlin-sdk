@@ -4,14 +4,15 @@
 
 package ru.campus.parsers.spbstu.group
 
-import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respondBadRequest
 import io.ktor.client.engine.mock.respondOk
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import ru.campus.parser.sdk.api.createDefaultHttpClient
 import ru.campus.parser.sdk.base.EntitiesCollector
 import ru.campus.parser.sdk.model.Entity
+import ru.campus.parsers.tests.sdk.ThrowableLogger
 import ru.campus.parsers.tests.sdk.readResourceFile
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
@@ -24,19 +25,22 @@ class SPBSTUGroupEntitiesCollectorTest {
     @BeforeTest
     fun setup() {
         collector = SPBSTUGroupEntitiesCollector(
-            HttpClient(MockEngine { request ->
-                when (request.url.toString()) {
-                    "https://ruz.spbstu.ru/" -> respondOk(
-                        readResourceFile("spbstu/ruz_spbstu_page.html")
-                    )
+            createDefaultHttpClient(
+                logger = ThrowableLogger(),
+                engine = MockEngine { request ->
+                    when (request.url.toString()) {
+                        "https://ruz.spbstu.ru" -> respondOk(
+                            readResourceFile("spbstu/ruz_spbstu_page.html")
+                        )
 
-                    "https://ruz.spbstu.ru/api/v1/ruz/faculties/122/groups" -> respondOk(
-                        readResourceFile("spbstu/group/faculty_122_groups.json")
-                    )
+                        "https://ruz.spbstu.ru/api/v1/ruz/faculties/122/groups" -> respondOk(
+                            readResourceFile("spbstu/group/faculty_122_groups.json")
+                        )
 
-                    else -> respondBadRequest()
+                        else -> respondBadRequest()
+                    }
                 }
-            })
+            )
         )
     }
 

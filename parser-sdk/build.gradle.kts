@@ -3,26 +3,55 @@
  */
 
 plugins {
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.atomicfu)
     `maven-publish`
 }
 
-dependencies {
-    implementation(kotlin("reflect"))
+kotlin {
+    jvm()
+    js {
+        nodejs()
+    }
 
-    api(libs.coroutines)
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(kotlin("reflect"))
 
-    api(libs.kotlinSerialization)
+                api(libs.coroutines)
 
-    api(libs.ktorClient)
-    implementation(libs.ktorClientOkHttp)
-    implementation(libs.ktorClientLogging)
-    implementation(libs.urlValidator)
+                api(libs.kotlinSerialization)
 
-    api(libs.kotlinxDateTime)
-    api(libs.apachePoi)
-    api(libs.log4jApi)
+                api(libs.ktorClient)
+                implementation(libs.ktorClientLogging)
 
-    testImplementation(libs.kotlinTestJUnit)
+                api(libs.kotlinxDateTime)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlinTestJUnit)
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                api(libs.ktorClientOkHttp)
+
+                api(libs.apachePoi)
+
+                implementation(libs.urlValidator)
+
+                api(libs.log4jApi)
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(libs.ktorClientJS)
+            }
+        }
+    }
 }

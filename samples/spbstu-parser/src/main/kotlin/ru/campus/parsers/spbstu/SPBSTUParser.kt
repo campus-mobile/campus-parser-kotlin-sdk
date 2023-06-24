@@ -9,8 +9,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.LocalDate
 import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 import ru.campus.parser.sdk.DateProvider
+import ru.campus.parser.sdk.Logger
 import ru.campus.parser.sdk.api.ParserApi
 import ru.campus.parser.sdk.api.createDefaultHttpClient
 import ru.campus.parser.sdk.base.BaseParser
@@ -23,6 +23,7 @@ import ru.campus.parser.sdk.model.ProcessedEntity
 import ru.campus.parser.sdk.model.SavedEntity
 import ru.campus.parser.sdk.model.SavedSchedule
 import ru.campus.parser.sdk.model.Schedule
+import ru.campus.parser.sdk.utils.asCampusLogger
 import ru.campus.parser.sdk.utils.createDefaultDateProvider
 import ru.campus.parser.sdk.utils.getParserApiUrl
 import ru.campus.parser.sdk.utils.weekName
@@ -38,7 +39,7 @@ import ru.campus.parsers.spbstu.group.SPBSTUGroupScheduleCollector
 class SPBSTUParser @JvmOverloads constructor(
     credentials: Credentials,
     parserApiBaseUrl: String = getParserApiUrl(),
-    override val logger: Logger = LogManager.getLogger(SPBSTUParser::class.java),
+    override val logger: Logger = LogManager.getLogger(SPBSTUParser::class.java).asCampusLogger(),
     httpClient: HttpClient = createDefaultHttpClient(logger),
     parserApi: ParserApi = ParserApi(
         httpClient = httpClient,

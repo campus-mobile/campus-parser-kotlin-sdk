@@ -6,6 +6,7 @@ package ru.campus.parsers.spbstu.group
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.jsoup.Jsoup
@@ -28,14 +29,14 @@ class SPBSTUGroupEntitiesCollector(
     private val apiUrl: String = "https://ruz.spbstu.ru/api/v1/ruz"
 
     override suspend fun collectEntities(): List<Entity> {
-        val page: String = httpClient.get(baseUrl)
+        val page: String = httpClient.get(baseUrl).bodyAsText()
         val document: Document = Jsoup.parse(page)
         val facultiesElements: Elements = document.select("a[class=faculty-list__link]")
         return facultiesElements.flatMap { facultyElement ->
             val facultyCode: String = facultyElement.attr("href").substringAfter("faculty/").substringBefore("/groups")
             val facultyUrl = "$apiUrl/faculties/$facultyCode/groups"
             val facultyName: String = facultyElement.ownText()
-            val facultyBody: String = httpClient.get(facultyUrl)
+            val facultyBody: String = httpClient.get(facultyUrl).bodyAsText()
             val json: SpbstuFaculty = Json.decodeFromString(facultyBody)
             json.groups.map { groupObject ->
                 val groupName: String = groupObject.groupName

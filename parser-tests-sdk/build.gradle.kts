@@ -3,9 +3,10 @@
  */
 
 plugins {
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinJvm)
     `maven-publish`
 }
+
 
 dependencies {
     api(projects.parserSdk)

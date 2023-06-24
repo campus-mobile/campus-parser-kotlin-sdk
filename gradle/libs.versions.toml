@@ -1,23 +1,26 @@
 [versions]
 # kotlin
-kotlinVersion = "1.6.10"
+kotlinVersion = "1.8.22"
 
 # kotlinx
-coroutinesVersion = "1.6.0"
+coroutinesVersion = "1.7.1"
 
 # ktor
-ktorClientVersion = "1.6.1"
+ktorClientVersion = "2.3.1"
 
 # okhttp
-okhttpVersion = "4.9.1"
+okhttpVersion = "4.10.0"
+
+# logs
+log4jVersion = "2.19.0"
 
 [libraries]
 # kotlin
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
 
 # kotlinx
-kotlinSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.3.2" }
-kotlinxDateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.3.2" }
+kotlinSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.5.1" }
+kotlinxDateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
 
@@ -25,6 +28,7 @@ coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ver
 ktorClient = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientVersion" }
 ktorClientLogging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientVersion" }
 ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientVersion" }
+ktorClientJS = { module = "io.ktor:ktor-client-js", version.ref = "ktorClientVersion" }
 ktorClientMock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorClientVersion" }
 
 # okhttp
@@ -41,8 +45,11 @@ apachePoi = { module = "org.apache.poi:poi", version = "5.2.0" }
 urlValidator = { module = "commons-validator:commons-validator", version = "1.7" }
 
 # logs
-log4jApi = { module = "org.apache.logging.log4j:log4j-api", version = "2.19.0" }
+log4jApi = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4jVersion" }
+log4jCore = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4jVersion" }
 
 [plugins]
-kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
+atomicfu = { id = "kotlinx-atomicfu", version = "0.21.0" }

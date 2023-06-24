@@ -5,6 +5,12 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
+plugins {
+    alias(libs.plugins.kotlinMultiplatform).apply(false)
+    alias(libs.plugins.kotlinJvm).apply(false)
+    alias(libs.plugins.atomicfu).apply(false)
+}
+
 subprojects {
     tasks.withType<AbstractTestTask> {
         testLogging {
@@ -21,12 +27,12 @@ subprojects {
 
     plugins.withId("org.gradle.maven-publish") {
         group = "me.campusapp.parsers"
-        version = "0.6.0"
+        version = "0.7.0"
 
-        configure<JavaPluginExtension> {
-            withJavadocJar()
-            withSourcesJar()
-        }
+//        configure<JavaPluginExtension> {
+//            withJavadocJar()
+//            withSourcesJar()
+//        }
 
         configure<PublishingExtension> {
             repositories {
@@ -47,11 +53,11 @@ subprojects {
                     }
                 }
             }
-            publications {
-                register<MavenPublication>("gpr") {
-                    from(components.getByName("java"))
-                }
-            }
+//            publications {
+//                register<MavenPublication>("gpr") {
+//                    from(components.getByName("java"))
+//                }
+//            }
         }
     }
 }

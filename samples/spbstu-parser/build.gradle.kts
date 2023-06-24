@@ -3,7 +3,7 @@
  */
 
 plugins {
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.kotlinSerialization)
 }
 
@@ -22,6 +22,8 @@ dependencies {
 
     implementation(libs.kotlinxDateTime)
     implementation(libs.apachePoi)
+
+    implementation(libs.log4jCore)
 
     testImplementation(projects.parserTestsSdk)
     testImplementation(libs.ktorClientMock)

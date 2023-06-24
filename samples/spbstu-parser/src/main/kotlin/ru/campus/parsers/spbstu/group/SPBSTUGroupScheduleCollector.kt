@@ -6,10 +6,10 @@ package ru.campus.parsers.spbstu.group
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.toJavaLocalDate
 import kotlinx.datetime.toKotlinLocalDate
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import ru.campus.parser.sdk.DateProvider
 import ru.campus.parser.sdk.base.ScheduleCollector
@@ -45,7 +45,7 @@ class SPBSTUGroupScheduleCollector(
         var date: LocalDate = dateProvider.getCurrentDateTime().date.toJavaLocalDate()
         for (i in 0 until 4) {
             val url: String = scheduleApi + entity.code + "?date=$date"
-            val scheduleString: String = httpClient.get(url)
+            val scheduleString: String = httpClient.get(url).bodyAsText()
             val daySchedule: SpbstuSchedule = json.decodeFromString(scheduleString)
             weekScheduleItems.addAll(
                 daySchedule.days.flatMap { day ->

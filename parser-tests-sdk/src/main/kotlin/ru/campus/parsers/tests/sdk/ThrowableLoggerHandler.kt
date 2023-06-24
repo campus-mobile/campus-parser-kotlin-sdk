@@ -8,9 +8,10 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.apache.logging.log4j.Marker
 import org.apache.logging.log4j.message.Message
+import ru.campus.parser.sdk.utils.asCampusLogger
 
 object ThrowableLogger {
-    operator fun invoke(): Logger {
+    operator fun invoke(): ru.campus.parser.sdk.Logger {
         val logger: Logger = LogManager.getLogger(ThrowableLogger::class.java)
         return object : Logger by logger {
             override fun logMessage(
@@ -30,6 +31,6 @@ object ThrowableLogger {
                     throw IllegalStateException(message?.formattedMessage ?: "unknown")
                 }
             }
-        }
+        }.asCampusLogger()
     }
 }
