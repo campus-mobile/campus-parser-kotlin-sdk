@@ -57,7 +57,7 @@ data class Schedule(
     ) {
         init {
             assertLength(::name, length = 1)
-            assertLength(::code, length = 1)
+            assertLength(::code, minLength = 1, maxLength = 120)
         }
     }
 
