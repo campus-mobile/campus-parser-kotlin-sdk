@@ -22,8 +22,8 @@ data class Entity(
     init {
         assertLength(::name, minLength = 2, maxLength = 120)
         assertLength(::newName, minLength = 2, maxLength = 120)
-        assertLength(::code, length = 1)
-        assertLength(::newCode, length = 1)
+        assertLength(::code, minLength = 1, maxLength = 120)
+        assertLength(::newCode, minLength = 1, maxLength = 120)
         assertUrl(::scheduleUrl)
     }
 
