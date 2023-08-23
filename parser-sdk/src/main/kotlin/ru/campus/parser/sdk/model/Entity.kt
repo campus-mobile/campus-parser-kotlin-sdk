@@ -23,7 +23,7 @@ data class Entity(
         assertLength(::name, minLength = 2, maxLength = 120)
         assertLength(::newName, minLength = 2, maxLength = 120)
         assertLength(::code, minLength = 1, maxLength = 120)
-        assertLength(::newCode, length = 1)
+        assertLength(::newCode, minLength = 1, maxLength = 120)
         assertUrl(::scheduleUrl)
     }
 
