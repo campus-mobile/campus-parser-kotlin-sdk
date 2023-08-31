@@ -26,7 +26,7 @@ class SPBSTUGroupEntitiesCollectorTest {
         collector = SPBSTUGroupEntitiesCollector(
             HttpClient(MockEngine { request ->
                 when (request.url.toString()) {
-                    "https://ruz.spbstu.ru/" -> respondOk(
+                    "https://ruz.spbstu.ru" -> respondOk(
                         readResourceFile("spbstu/ruz_spbstu_page.html")
                     )
 

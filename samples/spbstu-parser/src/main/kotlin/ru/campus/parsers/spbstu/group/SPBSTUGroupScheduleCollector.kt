@@ -25,6 +25,7 @@ import ru.campus.parsers.spbstu.model.SpbstuSchedule
 import java.net.URL
 import java.time.LocalDate
 import kotlinx.datetime.LocalDate as kotlinLocalDate
+import io.ktor.client.call.body
 
 /**
  * Коллектор расписания Санкт-Петербургского политехнического университета.
@@ -45,7 +46,7 @@ class SPBSTUGroupScheduleCollector(
         var date: LocalDate = dateProvider.getCurrentDateTime().date.toJavaLocalDate()
         for (i in 0 until 4) {
             val url: String = scheduleApi + entity.code + "?date=$date"
-            val scheduleString: String = httpClient.get(url)
+            val scheduleString: String = httpClient.get(url).body()
             val daySchedule: SpbstuSchedule = json.decodeFromString(scheduleString)
             weekScheduleItems.addAll(
                 daySchedule.days.flatMap { day ->

@@ -5,11 +5,10 @@
 package ru.campus.parser.sdk.utils
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
-import io.ktor.client.features.expectSuccess
-import io.ktor.client.request.get
+import io.ktor.client.call.body
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.header
-import io.ktor.client.statement.HttpStatement
+import io.ktor.client.request.prepareGet
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.ByteReadPacket
@@ -38,7 +37,7 @@ suspend fun getFileFromUrl(
     } catch (_: FileNotFoundException) {
         null
     }
-    return httpClient.get<HttpStatement>(urlString) {
+    return httpClient.prepareGet(urlString) {
         eTagHeader?.let { header("If-None-Match", it) }
         expectSuccess = false
     }.execute { httpResponse ->
@@ -59,7 +58,7 @@ suspend fun getFileFromUrl(
             etagFile.writeText(etagValue)
         }
 
-        val channel: ByteReadChannel = httpResponse.receive()
+        val channel: ByteReadChannel = httpResponse.body()
 
         if (channel.isClosedForRead.not()) {
             withContext(Dispatchers.IO) {
@@ -68,7 +67,7 @@ suspend fun getFileFromUrl(
             }
 
             while (!channel.isClosedForRead) {
-                val packet: ByteReadPacket = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong(), 32)
+                val packet: ByteReadPacket = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
                 while (!packet.isEmpty) {
                     val bytes: ByteArray = packet.readBytes()
                     withContext(Dispatchers.IO) { file.appendBytes(bytes) }
@@ -93,11 +92,11 @@ suspend fun simpleFileFromUrl(
     val cacheDir = File("cache/$cacheDirectoryName")
     cacheDir.mkdirs()
     val file = File(cacheDir, "$fileName.$fileExtension")
-    return httpClient.get<HttpStatement>(urlString).execute { httpResponse ->
+    return httpClient.prepareGet(urlString).execute { httpResponse ->
         if (httpResponse.status == HttpStatusCode.NotFound) {
             throw FileNotFoundException("file at $urlString not found")
         }
-        val channel: ByteReadChannel = httpResponse.receive()
+        val channel: ByteReadChannel = httpResponse.body()
 
         if (!channel.isClosedForRead) {
             withContext(Dispatchers.IO) {
@@ -106,7 +105,7 @@ suspend fun simpleFileFromUrl(
             }
 
             while (!channel.isClosedForRead) {
-                val packet: ByteReadPacket = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong(), 32)
+                val packet: ByteReadPacket = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
                 while (!packet.isEmpty) {
                     val bytes: ByteArray = packet.readBytes()
                     withContext(Dispatchers.IO) { file.appendBytes(bytes) }

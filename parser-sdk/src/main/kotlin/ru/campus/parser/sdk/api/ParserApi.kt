@@ -5,8 +5,8 @@
 package ru.campus.parser.sdk.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
-import io.ktor.client.features.expectSuccess
+import io.ktor.client.call.body
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.HttpRequest
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -31,9 +31,10 @@ class ParserApi(
     userName: String,
     password: String,
 ) {
-    @OptIn(InternalAPI::class)
+
     private val authHeader: String = "$userName:$password".encodeBase64()
 
+    @OptIn(InternalAPI::class)
     suspend fun sendEntity(entity: Entity): EntityResult {
         val response: HttpResponse = httpClient.post {
             url {
@@ -48,13 +49,14 @@ class ParserApi(
             expectSuccess = false
         }
         val status: HttpStatusCode = response.status
-        val body = response.receive<String>()
+        val body = response.body<String>()
 
         ensureStatusCodeOk(response.request, status, body)
 
         return json.decodeFromString(EntityResult.serializer(), body)
     }
 
+    @OptIn(InternalAPI::class)
     suspend fun sendSchedule(entityId: String, schedules: List<Schedule>): ScheduleResult {
         val response: HttpResponse = httpClient.post {
             url {
@@ -69,7 +71,7 @@ class ParserApi(
             expectSuccess = false
         }
         val status: HttpStatusCode = response.status
-        val body = response.receive<String>()
+        val body = response.body<String>()
 
         ensureStatusCodeOk(response.request, status, body)
 

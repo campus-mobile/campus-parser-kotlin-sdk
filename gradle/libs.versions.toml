@@ -6,7 +6,7 @@ kotlinVersion = "1.6.10"
 coroutinesVersion = "1.6.0"
 
 # ktor
-ktorClientVersion = "1.6.1"
+ktorClientVersion = "2.2.3"
 
 # okhttp
 okhttpVersion = "4.9.1"
