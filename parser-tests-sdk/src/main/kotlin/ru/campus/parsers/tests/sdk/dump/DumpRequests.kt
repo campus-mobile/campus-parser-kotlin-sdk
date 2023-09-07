@@ -5,7 +5,7 @@
 package ru.campus.parsers.tests.sdk.dump
 
 import io.ktor.client.HttpClient
-import io.ktor.client.features.HttpClientFeature
+import io.ktor.client.plugins.HttpClientPlugin
 import io.ktor.client.request.HttpRequest
 import io.ktor.client.statement.HttpResponsePipeline
 import io.ktor.http.encodeURLParameter
@@ -19,7 +19,7 @@ internal class DumpRequests(
         lateinit var dirName: String
     }
 
-    companion object Feature : HttpClientFeature<Config, DumpRequests> {
+    companion object Feature : HttpClientPlugin<Config, DumpRequests> {
         override val key: AttributeKey<DumpRequests> = AttributeKey("DumpRequests")
 
         override fun prepare(block: Config.() -> Unit): DumpRequests {

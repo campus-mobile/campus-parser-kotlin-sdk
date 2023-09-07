@@ -5,17 +5,18 @@
 package ru.campus.parser.sdk.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
-import io.ktor.client.features.expectSuccess
+import io.ktor.client.call.body
+import io.ktor.client.plugins.expectSuccess
 import io.ktor.client.request.HttpRequest
 import io.ktor.client.request.header
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.request
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.appendPathSegments
 import io.ktor.http.pathComponents
 import io.ktor.http.takeFrom
-import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -31,24 +32,24 @@ class ParserApi(
     userName: String,
     password: String,
 ) {
-    @OptIn(InternalAPI::class)
+
     private val authHeader: String = "$userName:$password".encodeBase64()
 
     suspend fun sendEntity(entity: Entity): EntityResult {
         val response: HttpResponse = httpClient.post {
             url {
                 takeFrom(baseUrl)
-                pathComponents("entities")
+                this.appendPathSegments("entities")
             }
 
             header("Authorization", "Basic $authHeader")
             header("Content-Type", "application/json")
 
-            body = json.encodeToString(Entity.serializer(), entity)
+            setBody(json.encodeToString(Entity.serializer(), entity))
             expectSuccess = false
         }
         val status: HttpStatusCode = response.status
-        val body = response.receive<String>()
+        val body: String = response.body()
 
         ensureStatusCodeOk(response.request, status, body)
 
@@ -65,11 +66,11 @@ class ParserApi(
             header("Authorization", "Basic $authHeader")
             header("Content-Type", "application/json")
 
-            body = json.encodeToString(ListSerializer(Schedule.serializer()), schedules)
+            setBody(json.encodeToString(ListSerializer(Schedule.serializer()), schedules))
             expectSuccess = false
         }
         val status: HttpStatusCode = response.status
-        val body = response.receive<String>()
+        val body: String = response.body()
 
         ensureStatusCodeOk(response.request, status, body)
 

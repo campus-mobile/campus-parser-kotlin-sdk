@@ -8,9 +8,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.engine.okhttp.OkHttpConfig
-import io.ktor.client.features.HttpTimeout
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logging
+import io.ktor.client.plugins.HttpRequestRetry
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import org.apache.logging.log4j.Logger
 
 fun createDefaultHttpClient(
@@ -39,12 +40,17 @@ fun createDefaultHttpClient(
         }
         install(Logging) {
             this.level = LogLevel.INFO
-            this.logger = object : io.ktor.client.features.logging.Logger {
+            this.logger = object : io.ktor.client.plugins.logging.Logger {
                 override fun log(message: String) {
                     logger.info(message)
                 }
             }
         }
+        install(HttpRequestRetry) {
+            retryOnExceptionOrServerErrors(maxRetries = 3)
+            exponentialDelay()
+        }
+
         configure()
     }
 }
