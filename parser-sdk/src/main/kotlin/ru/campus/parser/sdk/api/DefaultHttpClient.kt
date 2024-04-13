@@ -19,6 +19,7 @@ fun createDefaultHttpClient(
     withProxy: Boolean = false,
     useHttp1: Boolean = false,
     withCookie: Boolean = true,
+    needRetry: Boolean = true,
     socketTimeoutMillis: Long = 10000,
     requestTimeoutMillis: Long = 30000,
     configure: HttpClientConfig<OkHttpConfig>.() -> Unit = {},
@@ -46,9 +47,11 @@ fun createDefaultHttpClient(
                 }
             }
         }
-        install(HttpRequestRetry) {
-            retryOnExceptionOrServerErrors(maxRetries = 3)
-            exponentialDelay()
+        if (needRetry) {
+            install(HttpRequestRetry) {
+                retryOnExceptionOrServerErrors(maxRetries = 3)
+                exponentialDelay()
+            }
         }
 
         configure()
