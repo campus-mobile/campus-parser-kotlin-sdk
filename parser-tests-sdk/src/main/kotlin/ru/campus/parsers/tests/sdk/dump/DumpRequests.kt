@@ -29,7 +29,7 @@ internal class DumpRequests(
         }
 
         override fun install(feature: DumpRequests, scope: HttpClient) {
-            scope.responsePipeline.intercept(HttpResponsePipeline.Parse) { container ->
+            scope.responsePipeline.intercept(HttpResponsePipeline.After) { container ->
                 val request: HttpRequest = this.context.request
                 val url: String = request.url.toString().encodeURLParameter()
                 val method: String = request.method.value
