@@ -19,22 +19,29 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.X509TrustManager
 
 fun OkHttpClient.Builder.setupProxy(): OkHttpClient.Builder {
-    return proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("x.botproxy.net", 8080)))
-}
+    val username: String? = System.getenv("PROXY_USERNAME").takeIf { it.isNotEmpty() }
+    val password: String? = System.getenv("PROXY_PASSWORD").takeIf { it.isNotEmpty() }
 
-fun OkHttpClient.Builder.setupAuthenticator(): OkHttpClient.Builder {
-    val username: String = System.getenv("PROXY_USERNAME")
-    val password: String = System.getenv("PROXY_PASSWORD")
-    val credential = Credentials.basic(username, password)
+    return when {
+        username != null && password != null -> {
+            val credential = Credentials.basic(username, password)
 
-    val proxyAuthenticator: Authenticator = object : Authenticator {
-        override fun authenticate(route: Route?, response: Response): Request {
-            return response.request.newBuilder()
-                .header("Proxy-Authorization", credential)
-                .build()
+            val proxyAuthenticator: Authenticator = object : Authenticator {
+                override fun authenticate(route: Route?, response: Response): Request {
+                    return response.request.newBuilder()
+                        .header("Proxy-Authorization", credential)
+                        .build()
+                }
+            }
+
+            proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("x.botproxy.net", 8080)))
+                .proxyAuthenticator(proxyAuthenticator)
+        }
+
+        else -> {
+            proxy(Proxy(Proxy.Type.HTTP, InetSocketAddress("0.0.0.0", 8080)))
         }
     }
-    return proxyAuthenticator(proxyAuthenticator)
 }
 
 fun OkHttpClient.Builder.disableSslChecks(): OkHttpClient.Builder {
