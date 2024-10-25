@@ -30,7 +30,6 @@ fun createDefaultHttpClient(
                 if (withCookie) cookieJar(InMemoryCookieJar())
                 if (useHttp1) setHttpProtocol()
                 if (withProxy) setupProxy()
-                if (withProxy) setupAuthenticator()
                 disableSslChecks()
             }
         }
