@@ -38,14 +38,6 @@ subprojects {
                         password = project.findProperty("gpr.key")?.toString() ?: System.getenv("GPR_TOKEN")
                     }
                 }
-                maven {
-                    name = "SpacePackages"
-                    url = uri("https://maven.pkg.jetbrains.space/campus/p/public/maven")
-                    credentials {
-                        username = System.getenv("SPACE_USERNAME")
-                        password = System.getenv("SPACE_PASSWORD")
-                    }
-                }
             }
             publications {
                 register<MavenPublication>("gpr") {
