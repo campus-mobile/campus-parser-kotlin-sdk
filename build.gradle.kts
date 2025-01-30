@@ -21,7 +21,7 @@ subprojects {
 
     plugins.withId("org.gradle.maven-publish") {
         group = "me.campusapp.parsers"
-        version = "0.7.2"
+        version = "0.7.3"
 
         configure<JavaPluginExtension> {
             withJavadocJar()
