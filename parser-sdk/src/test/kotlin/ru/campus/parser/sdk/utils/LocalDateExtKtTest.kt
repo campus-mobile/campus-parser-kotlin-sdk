@@ -12,6 +12,8 @@ class LocalDateExtKtTest {
 
     @Test
     fun testWeekOfYear() {
+        // Недели считаются от той недели, на которую выпало 4 января. (международный стандарт)
+        // Можно брать значения с гугл-календаря, он следует тому же стандарту.
         for (i in 1..2) {
             assertWeek(weekNumber = 52, date = LocalDate(year = 2022, monthNumber = 1, dayOfMonth = i))
         }
@@ -41,6 +43,28 @@ class LocalDateExtKtTest {
         }
         for (i in 1..6) {
             assertWeek(weekNumber = 9, date = LocalDate(year = 2022, monthNumber = 3, dayOfMonth = i))
+        }
+        assertWeek(weekNumber = 52, date = LocalDate(year = 2023, monthNumber = 1, dayOfMonth = 1))
+        for (i in 2..8) {
+            assertWeek(weekNumber = 1, date = LocalDate(year = 2023, monthNumber = 1, dayOfMonth = i))
+        }
+        for (i in 1..7) {
+            assertWeek(weekNumber = 1, date = LocalDate(year = 2024, monthNumber = 1, dayOfMonth = i))
+        }
+        for (i in 30..31) {
+            assertWeek(weekNumber = 1, date = LocalDate(year = 2024, monthNumber = 12, dayOfMonth = i))
+        }
+        for (i in 1..5) {
+            assertWeek(weekNumber = 1, date = LocalDate(year = 2025, monthNumber = 1, dayOfMonth = i))
+        }
+        for (i in 29..31) {
+            assertWeek(weekNumber = 1, date = LocalDate(year = 2025, monthNumber = 12, dayOfMonth = i))
+        }
+        for (i in 28..31) {
+            assertWeek(weekNumber = 53, date = LocalDate(year = 2026, monthNumber = 12, dayOfMonth = i))
+        }
+        for (i in 1..3) {
+            assertWeek(weekNumber = 53, date = LocalDate(year = 2027, monthNumber = 1, dayOfMonth = i))
         }
     }
 
