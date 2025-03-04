@@ -14,28 +14,28 @@ private val urlValidator = UrlValidator(ALLOW_2_SLASHES)
 fun <T : String?> assertTimeValid(property: KProperty<T>) {
     val value: String = property.call() ?: return
 
-    assert(timeRegex.matches(value)) { "${property.name} [$value] have invalid format" }
+    check(timeRegex.matches(value)) { "${property.name} [$value] have invalid format" }
     val (hours: Int, minutes: Int) = value.split(":").map { it.toInt() }
-    assert(hours in 0..23) { "hours should be in 0..23" }
-    assert(minutes in 0..59) { "minutes should be in 0..59" }
+    check(hours in 0..23) { "hours should be in 0..23" }
+    check(minutes in 0..59) { "minutes should be in 0..59" }
 }
 
 fun <T : String?> assertLength(property: KProperty<T>, minLength: Int, maxLength: Int) {
     val value: String = property.call() ?: return
-    assert(value.length in minLength until maxLength) { "${property.name} [$value] should be more than $minLength and less $maxLength characters" }
+    check(value.length in minLength until maxLength) { "${property.name} [$value] should be more than $minLength and less $maxLength characters" }
 }
 
 fun <T : String?> assertUrl(property: KProperty<T>) {
     val value: String = property.call() ?: return
-    assert(urlValidator.isValid(value)) { "${property.name} [$value] invalid url" }
+    check(urlValidator.isValid(value)) { "${property.name} [$value] invalid url" }
 }
 
 fun <T : String?> assertLength(property: KProperty<T>, length: Int) {
     val value: String = property.call() ?: return
-    assert(value.length > length) { "${property.name} [$value] should be more than $length character" }
+    check(value.length > length) { "${property.name} [$value] should be more than $length character" }
 }
 
 fun <T : Int?> assertMin(property: KProperty<T>, minValue: Int) {
     val value: Int = property.call() ?: return
-    assert(value > minValue) { "${property.name} [$value] should be more than $minValue" }
+    check(value > minValue) { "${property.name} [$value] should be more than $minValue" }
 }

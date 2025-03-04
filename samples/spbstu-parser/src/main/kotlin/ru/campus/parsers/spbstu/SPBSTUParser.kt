@@ -86,12 +86,17 @@ class SPBSTUParser @JvmOverloads constructor(
                 savedSchedule.schedule.flatMap { schedule ->
                     schedule.intervals.flatMap { interval ->
                         interval.lessons.flatMap { lesson ->
-                            lesson.teachers.map { teacher ->
-                                Entity(
-                                    name = teacher.name,
-                                    code = teacher.code,
-                                    type = Entity.Type.Teacher
-                                )
+                            lesson.teachers.mapNotNull { teacher ->
+                                try {
+                                    Entity(
+                                        name = teacher.name,
+                                        code = teacher.code,
+                                        type = Entity.Type.Teacher
+                                    )
+                                } catch (error: IllegalStateException) {
+                                    logger.error(error)
+                                    null
+                                }
                             }
                         }
                     }
@@ -141,15 +146,20 @@ class SPBSTUParser @JvmOverloads constructor(
     }
 
     private fun List<Schedule.Interval>.postprocess(): List<Schedule.Interval> {
-        return groupBy { Triple(it.number, it.start, it.end) }.map { (group, intervals) ->
+        return groupBy { Triple(it.number, it.start, it.end) }.mapNotNull { (group, intervals) ->
             val lessons: List<Schedule.Lesson> = intervals.flatMap { it.lessons }
 
-            Schedule.Interval(
-                number = group.first,
-                start = group.second,
-                end = group.third,
-                lessons = lessons
-            )
+            try {
+                Schedule.Interval(
+                    number = group.first,
+                    start = group.second,
+                    end = group.third,
+                    lessons = lessons
+                )
+            } catch (e: IllegalStateException) {
+                logger.error(e)
+                null
+            }
         }
     }
 }

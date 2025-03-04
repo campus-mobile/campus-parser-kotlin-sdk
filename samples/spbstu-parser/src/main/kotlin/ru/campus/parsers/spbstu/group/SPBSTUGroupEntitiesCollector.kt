@@ -38,25 +38,30 @@ class SPBSTUGroupEntitiesCollector(
             val facultyName: String = facultyElement.ownText()
             val facultyBody: String = httpClient.get(facultyUrl).body()
             val json: SpbstuFaculty = Json.decodeFromString(facultyBody)
-            json.groups.map { groupObject ->
+            json.groups.mapNotNull { groupObject ->
                 val groupName: String = groupObject.groupName
                 val code: String = groupObject.code.toString()
                 val course: Int = groupObject.course
                 val educationForm: String = groupObject.educationForm
                 val degree: Int = groupObject.degree
                 val url = "$baseUrl/faculty/$facultyCode/groups/$code"
-                Entity(
-                    name = groupName,
-                    code = code,
-                    scheduleUrl = url,
-                    type = Entity.Type.Group,
-                    extra = Entity.Extra(
-                        faculty = facultyName,
-                        course = course,
-                        degree = getDegree(degree),
-                        educationForm = getEducationForm(educationForm)
+                try {
+                    Entity(
+                        name = groupName,
+                        code = code,
+                        scheduleUrl = url,
+                        type = Entity.Type.Group,
+                        extra = Entity.Extra(
+                            faculty = facultyName,
+                            course = course,
+                            degree = getDegree(degree),
+                            educationForm = getEducationForm(educationForm)
+                        )
                     )
-                )
+                } catch (error: IllegalStateException) {
+                    error.printStackTrace()
+                    null
+                }
             }
         }
     }

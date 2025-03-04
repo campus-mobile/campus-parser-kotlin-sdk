@@ -105,13 +105,18 @@ abstract class BaseParser(
                 val intervals: List<Schedule.Interval> = weekScheduleItems
                     .filter { it.dayCondition(date) && it.dayOfWeek == date.dayOfWeek }
                     .sortedBy { it.timeTableInterval.lessonNumber }
-                    .map { item ->
-                        Schedule.Interval(
-                            number = item.timeTableInterval.lessonNumber,
-                            start = item.timeTableInterval.startTime,
-                            end = item.timeTableInterval.endTime,
-                            lessons = listOf(item.lesson)
-                        )
+                    .mapNotNull { item ->
+                        try {
+                            Schedule.Interval(
+                                number = item.timeTableInterval.lessonNumber,
+                                start = item.timeTableInterval.startTime,
+                                end = item.timeTableInterval.endTime,
+                                lessons = listOf(item.lesson)
+                            )
+                        } catch (error: IllegalStateException) {
+                            logger.error(error)
+                            null
+                        }
                     }
                     .let(postprocessIntervals)
 

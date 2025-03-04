@@ -77,17 +77,26 @@ class SPBSTUGroupScheduleCollector(
         )
     }
 
+    @Throws(IllegalStateException::class)
     private fun processLesson(lesson: SpbstuLesson): Schedule.Lesson {
         val audAndBuilding: SpbstuAuditory? = lesson.auditory?.first()
         val building: SpbstuBuilding? = audAndBuilding?.building
         val linksList: MutableList<Schedule.Link> = mutableListOf()
         val webinarLink: String? = runCatching { URL(lesson.webinarLink) }.getOrNull()?.toString()
         if (webinarLink != null) {
-            linksList.add(Schedule.Link(title = "Вебинар", url = webinarLink))
+            try {
+                linksList.add(Schedule.Link(title = "Вебинар", url = webinarLink))
+            } catch (error: IllegalStateException) {
+                error.printStackTrace()
+            }
         }
         val lmsLink: String? = runCatching { URL(lesson.lmsLink) }.getOrNull()?.toString()
         if (lmsLink != null) {
-            linksList.add(Schedule.Link(title = "СДО", url = lmsLink))
+            try {
+                linksList.add(Schedule.Link(title = "СДО", url = lmsLink))
+            } catch (error: IllegalStateException) {
+                error.printStackTrace()
+            }
         }
         return Schedule.Lesson(
             subject = lesson.subject,
@@ -99,8 +108,13 @@ class SPBSTUGroupScheduleCollector(
                 address = building?.address?.takeIf { it.isNotEmpty() },
                 coordinate = null
             ),
-            teachers = lesson.teachers?.map { teacher ->
-                Schedule.Entity(name = teacher.name, code = teacher.code.toString())
+            teachers = lesson.teachers?.mapNotNull { teacher ->
+                try {
+                    Schedule.Entity(name = teacher.name, code = teacher.code.toString())
+                } catch (error: IllegalStateException) {
+                    error.printStackTrace()
+                    null
+                }
             } ?: emptyList(),
             links = linksList
         )

@@ -89,24 +89,34 @@ fun List<Schedule.Entity>.enrichEntities(
     fullEntities: List<Entity>,
     onNotFound: (Schedule.Entity) -> Unit,
 ): List<Schedule.Entity> {
-    return map { shortEntity ->
+    return mapNotNull { shortEntity ->
         val fullEntityByCode = fullEntities.firstOrNull { it.code == shortEntity.code }
         if (fullEntityByCode != null) {
-            return@map Schedule.Entity(
-                name = fullEntityByCode.name,
-                code = shortEntity.code
-            )
+            return@mapNotNull try {
+                Schedule.Entity(
+                    name = fullEntityByCode.name,
+                    code = shortEntity.code
+                )
+            } catch (error: IllegalStateException) {
+                error.printStackTrace()
+                null
+            }
         }
 
         val fullEntityByName = fullEntities.singleOrNull { it.name == shortEntity.name }
         if (fullEntityByName != null) {
-            return@map Schedule.Entity(
-                name = shortEntity.name,
-                code = fullEntityByName.code
-            )
+            return@mapNotNull try {
+                Schedule.Entity(
+                    name = shortEntity.name,
+                    code = fullEntityByName.code
+                )
+            } catch (error: IllegalStateException) {
+                error.printStackTrace()
+                null
+            }
         }
 
         onNotFound(shortEntity)
-        return@map shortEntity
+        return@mapNotNull shortEntity
     }
 }
