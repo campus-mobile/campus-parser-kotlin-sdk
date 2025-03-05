@@ -14,28 +14,40 @@ private val urlValidator = UrlValidator(ALLOW_2_SLASHES)
 fun <T : String?> assertTimeValid(property: KProperty<T>) {
     val value: String = property.call() ?: return
 
-    assert(timeRegex.matches(value)) { "${property.name} [$value] have invalid format" }
+    sdkAssert(timeRegex.matches(value)) { "${property.name} [$value] have invalid format" }
     val (hours: Int, minutes: Int) = value.split(":").map { it.toInt() }
-    assert(hours in 0..23) { "hours should be in 0..23" }
-    assert(minutes in 0..59) { "minutes should be in 0..59" }
+    sdkAssert(hours in 0..23) { "hours should be in 0..23" }
+    sdkAssert(minutes in 0..59) { "minutes should be in 0..59" }
 }
 
 fun <T : String?> assertLength(property: KProperty<T>, minLength: Int, maxLength: Int) {
     val value: String = property.call() ?: return
-    assert(value.length in minLength until maxLength) { "${property.name} [$value] should be more than $minLength and less $maxLength characters" }
+    sdkAssert(value.length in minLength until maxLength) { "${property.name} [$value] should be more than $minLength and less $maxLength characters" }
 }
 
 fun <T : String?> assertUrl(property: KProperty<T>) {
     val value: String = property.call() ?: return
-    assert(urlValidator.isValid(value)) { "${property.name} [$value] invalid url" }
+    sdkAssert(urlValidator.isValid(value)) { "${property.name} [$value] invalid url" }
 }
 
 fun <T : String?> assertLength(property: KProperty<T>, length: Int) {
     val value: String = property.call() ?: return
-    assert(value.length > length) { "${property.name} [$value] should be more than $length character" }
+    sdkAssert(value.length > length) { "${property.name} [$value] should be more than $length character" }
 }
 
 fun <T : Int?> assertMin(property: KProperty<T>, minValue: Int) {
     val value: Int = property.call() ?: return
-    assert(value > minValue) { "${property.name} [$value] should be more than $minValue" }
+    sdkAssert(value > minValue) { "${property.name} [$value] should be more than $minValue" }
+}
+
+fun sdkAssert(value: Boolean, lazyMessage: () -> Any) {
+    if (!value) {
+        val message = lazyMessage()
+        val error = AssertionError(message)
+        if (System.getenv("ENVIRONMENT") === "production") {
+            error.printStackTrace()
+        } else {
+            throw error
+        }
+    }
 }
