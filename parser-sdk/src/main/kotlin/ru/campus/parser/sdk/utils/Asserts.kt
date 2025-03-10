@@ -44,7 +44,7 @@ fun sdkAssert(value: Boolean, lazyMessage: () -> Any) {
     if (!value) {
         val message = lazyMessage()
         val error = AssertionError(message)
-        if (System.getenv("ENVIRONMENT") === "production") {
+        if (System.getenv("ENVIRONMENT") == "production") {
             error.printStackTrace()
         } else {
             throw error
